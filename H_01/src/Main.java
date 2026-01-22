@@ -21,52 +21,50 @@ public class Main {
 
         switch (option) {
 
-            case 1: //square
+            case 1:
                 System.out.print("Side length: ");
-                double side = sc.nextDouble();
-                perimeter = 4 * side;
-                area = side * side;
+                Square square = new Square(sc.nextDouble());
+                area = square.getArea();
+                perimeter = square.getPerimeter();
                 break;
 
-            case 2: //rectangle
+            case 2:
                 System.out.print("Width: ");
-                double width = sc.nextDouble();
+                double w = sc.nextDouble();
                 System.out.print("Height: ");
-                double height = sc.nextDouble();
-                perimeter = 2 * (width + height);
-                area = width * height;
+                double h = sc.nextDouble();
+                Rectangle rectangle = new Rectangle(w, h);
+                area = rectangle.getArea();
+                perimeter = rectangle.getPerimeter();
                 break;
 
-            case 3://triangle
+            case 3:
                 System.out.print("Side length: ");
-                double tSide = sc.nextDouble();
-                perimeter = 3 * tSide;
-                area = (Math.sqrt(3) / 4) * tSide * tSide;
+                Triangle triangle = new Triangle(sc.nextDouble());
+                area = triangle.getArea();
+                perimeter = triangle.getPerimeter();
                 break;
 
-            case 4://circle
+            case 4:
                 System.out.print("Radius: ");
-                double radius = sc.nextDouble();
-                perimeter = 2 * Math.PI * radius;
-                area = Math.PI * radius * radius;
+                Circle circle = new Circle(sc.nextDouble());
+                area = circle.getArea();
+                perimeter = circle.getPerimeter();
                 break;
 
-            case 5://pentagon
+            case 5:
                 System.out.print("Side length: ");
-                double pSide = sc.nextDouble();
-                perimeter = 5 * pSide;
-                area = (5 * pSide * pSide) / (4 * Math.tan(Math.PI / 5));
+                Pentagon pentagon = new Pentagon(sc.nextDouble());
+                area = pentagon.getArea();
+                perimeter = pentagon.getPerimeter();
                 break;
 
-            case 6: //semi circle
+            case 6:
                 System.out.print("Radius: ");
-                double r = sc.nextDouble();
-
-                area = 0.5 * Math.PI * r * r;
-                //this is an arc (half perimeter) plus the diameter
-                perimeter = Math.PI * r + 2 * r;
+                SemiCircle semiCircle = new SemiCircle(sc.nextDouble());
+                area = semiCircle.getArea();
+                perimeter = semiCircle.getPerimeter();
                 break;
-
 
             default:
                 System.out.println("Invalid option");
@@ -78,7 +76,104 @@ public class Main {
         System.out.println("Perimeter: " + perimeter);
         System.out.println("Area: " + area);
 
-
         sc.close();
+    }
+}
+
+//classes
+class Square {
+    double side;
+
+    Square(double side) {
+        this.side = side;
+    }
+
+    double getArea() {
+        return side * side;
+    }
+
+    double getPerimeter() {
+        return 4 * side;
+    }
+}
+
+class Rectangle {
+    double width, height;
+
+    Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    double getArea() {
+        return width * height;
+    }
+
+    double getPerimeter() {
+        return 2 * (width + height);
+    }
+}
+
+class Triangle { // equilateral
+    double side;
+
+    Triangle(double side) {
+        this.side = side;
+    }
+
+    double getArea() {
+        return (Math.sqrt(3) / 4) * side * side;
+    }
+
+    double getPerimeter() {
+        return 3 * side;
+    }
+}
+
+class Circle {
+    double radius;
+
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+    double getArea() {
+        return Math.PI * radius * radius;
+    }
+
+    double getPerimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+
+class Pentagon {
+    double side;
+
+    Pentagon(double side) {
+        this.side = side;
+    }
+
+    double getArea() {
+        return (5 * side * side) / (4 * Math.tan(Math.PI / 5));
+    }
+
+    double getPerimeter() {
+        return 5 * side;
+    }
+}
+
+class SemiCircle {
+    double radius;
+
+    SemiCircle(double radius) {
+        this.radius = radius;
+    }
+
+    double getArea() {
+        return 0.5 * Math.PI * radius * radius;
+    }
+
+    double getPerimeter() {
+        return Math.PI * radius + 2 * radius;
     }
 }
