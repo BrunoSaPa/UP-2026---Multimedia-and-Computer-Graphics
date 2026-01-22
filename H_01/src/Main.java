@@ -16,16 +16,13 @@ public class Main {
 
         int option = sc.nextInt();
 
-        double area = 0;
-        double perimeter = 0;
+        Shape shape = null;
 
         switch (option) {
 
             case 1:
                 System.out.print("Side length: ");
-                Square square = new Square(sc.nextDouble());
-                area = square.getArea();
-                perimeter = square.getPerimeter();
+                shape = new Square(sc.nextDouble());
                 break;
 
             case 2:
@@ -33,37 +30,27 @@ public class Main {
                 double w = sc.nextDouble();
                 System.out.print("Height: ");
                 double h = sc.nextDouble();
-                Rectangle rectangle = new Rectangle(w, h);
-                area = rectangle.getArea();
-                perimeter = rectangle.getPerimeter();
+                shape = new Rectangle(w, h);
                 break;
 
             case 3:
                 System.out.print("Side length: ");
-                Triangle triangle = new Triangle(sc.nextDouble());
-                area = triangle.getArea();
-                perimeter = triangle.getPerimeter();
+                shape = new Triangle(sc.nextDouble());
                 break;
 
             case 4:
                 System.out.print("Radius: ");
-                Circle circle = new Circle(sc.nextDouble());
-                area = circle.getArea();
-                perimeter = circle.getPerimeter();
+                shape = new Circle(sc.nextDouble());
                 break;
 
             case 5:
                 System.out.print("Side length: ");
-                Pentagon pentagon = new Pentagon(sc.nextDouble());
-                area = pentagon.getArea();
-                perimeter = pentagon.getPerimeter();
+                shape = new Pentagon(sc.nextDouble());
                 break;
 
             case 6:
                 System.out.print("Radius: ");
-                SemiCircle semiCircle = new SemiCircle(sc.nextDouble());
-                area = semiCircle.getArea();
-                perimeter = semiCircle.getPerimeter();
+                shape = new SemiCircle(sc.nextDouble());
                 break;
 
             default:
@@ -73,15 +60,21 @@ public class Main {
         }
 
         System.out.println("\nResults:");
-        System.out.println("Perimeter: " + perimeter);
-        System.out.println("Area: " + area);
+        System.out.println("Perimeter: " + shape.getPerimeter());
+        System.out.println("Area: " + shape.getArea());
 
         sc.close();
     }
 }
 
-//classes
-class Square {
+//base class
+abstract class Shape {
+    abstract double getArea();
+    abstract double getPerimeter();
+}
+
+//shapes
+class Square extends Shape {
     double side;
 
     Square(double side) {
@@ -97,7 +90,7 @@ class Square {
     }
 }
 
-class Rectangle {
+class Rectangle extends Shape {
     double width, height;
 
     Rectangle(double width, double height) {
@@ -114,7 +107,7 @@ class Rectangle {
     }
 }
 
-class Triangle { // equilateral
+class Triangle extends Shape { // equilateral
     double side;
 
     Triangle(double side) {
@@ -130,7 +123,7 @@ class Triangle { // equilateral
     }
 }
 
-class Circle {
+class Circle extends Shape {
     double radius;
 
     Circle(double radius) {
@@ -146,7 +139,7 @@ class Circle {
     }
 }
 
-class Pentagon {
+class Pentagon extends Shape {
     double side;
 
     Pentagon(double side) {
@@ -162,7 +155,7 @@ class Pentagon {
     }
 }
 
-class SemiCircle {
+class SemiCircle extends Shape {
     double radius;
 
     SemiCircle(double radius) {
