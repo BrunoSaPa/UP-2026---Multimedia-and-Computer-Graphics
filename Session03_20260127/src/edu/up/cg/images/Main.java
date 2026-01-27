@@ -16,6 +16,7 @@ public class Main {
         //lower half
         for(int y=0 ; y < height; y++){
             for(int x=0; x<width; x++){
+                //calculate the middle line which is the slope
                 boolean isLowerTriangle =  y >=  (double)height / width * x;
                 if(isLowerTriangle){
                     image.setRGB(x,y, Color.blue.getRGB());
