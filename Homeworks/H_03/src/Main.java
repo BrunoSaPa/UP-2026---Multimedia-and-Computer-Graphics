@@ -1,13 +1,28 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import up.edu.cg.compression.Decompressor;
+import up.edu.cg.compression.VectorQuantizer;
+import up.edu.cg.core.Block;
+import up.edu.cg.core.ImageData;
+import up.edu.cg.io.ImageIOUtil;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
-    }
+void main() throws IOException {
+
+    ImageData img = ImageIOUtil.load("input2.png");
+
+    Block[] blocks = img.toBlocks(4);
+
+    VectorQuantizer vq = new VectorQuantizer();
+    vq.train(blocks, 256);
+
+    byte[] indices = vq.encode(blocks);
+
+    ImageData reconstructed =
+            Decompressor.reconstruct(
+                    img.getWidth(),
+                    img.getHeight(),
+                    4,
+                    vq.getCodebook(),
+                    indices
+            );
+
+    ImageIOUtil.save(reconstructed, "output2.png");
 }
