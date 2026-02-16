@@ -44,6 +44,6 @@ public class ImageIOUtil {
                 img.setRGB(x, y, rgb);
             }
         }
-        ImageIO.write(img, "png", new File(path));
+        ImageIO.write(img, "jpg", new File(path));
     }
 }

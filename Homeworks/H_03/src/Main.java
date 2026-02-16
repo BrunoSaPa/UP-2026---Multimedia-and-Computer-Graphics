@@ -24,5 +24,5 @@ void main() throws IOException {
                     indices
             );
 
-    ImageIOUtil.save(reconstructed, "output2.png");
+    ImageIOUtil.save(reconstructed, "output2.jpg");
 }
