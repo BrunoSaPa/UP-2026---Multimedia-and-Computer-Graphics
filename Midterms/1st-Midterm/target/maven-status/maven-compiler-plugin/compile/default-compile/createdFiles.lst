@@ -1,0 +1,15 @@
+up/edu/cg/operations/InvertOperation.class
+up/edu/cg/operations/ImageOperation.class
+up/edu/cg/model/Pixel.class
+up/edu/cg/service/ImageHistory.class
+up/edu/cg/operations/CropOperation.class
+Main.class
+up/edu/cg/ui/MainFrame.class
+up/edu/cg/model/Point.class
+up/edu/cg/operations/RotateOperation.class
+up/edu/cg/ui/ToolbarPanel.class
+up/edu/cg/model/ImageRegion.class
+up/edu/cg/model/ImageModel.class
+up/edu/cg/service/ImageProcessor.class
+up/edu/cg/controller/ImageController.class
+up/edu/cg/ui/ImagePanel.class

@@ -1,0 +1,15 @@
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/Main.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/controller/ImageController.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/model/ImageModel.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/model/ImageRegion.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/model/Pixel.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/model/Point.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/operations/CropOperation.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/operations/ImageOperation.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/operations/InvertOperation.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/operations/RotateOperation.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/service/ImageHistory.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/service/ImageProcessor.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/ui/ImagePanel.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/ui/MainFrame.java
+/Users/brunosanchezpadilla/Documents/GitHub/UP/UP-2026---Multimedia-and-Computer-Graphics/Midterms/1st-Midterm/src/main/java/up/edu/cg/ui/ToolbarPanel.java
