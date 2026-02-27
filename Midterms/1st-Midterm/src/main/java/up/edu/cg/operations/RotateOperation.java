@@ -55,7 +55,7 @@ public class RotateOperation implements ImageOperation {
             for (int x = 0; x < width; x++)
                 result.setPixel(startX + x, startY + y, white.copy());
 
-        //paste final buffer
+        //paste final buffer into the image
         for (int y = 0; y < newHeight; y++) {
             for (int x = 0; x < newWidth; x++) {
                 int targetX = newStartX + x;
@@ -71,14 +71,15 @@ public class RotateOperation implements ImageOperation {
         return result;
     }
 
-    //buffer rotation only
     private Pixel[][] rotate90(Pixel[][] src) {
         int height = src.length;
         int width  = src[0].length;
 
+        // i use [width][height] to account for rectangles since it is rotated, height is now width and viceversa
         Pixel[][] rotated = new Pixel[width][height];
         for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)
+                //take the source pixel and place it in its rotated position eg; the [0][0] of the original is now [0][height-1] and it is in the rotated corner that it should be
                 rotated[x][height - 1 - y] = src[y][x];
 
         return rotated;
