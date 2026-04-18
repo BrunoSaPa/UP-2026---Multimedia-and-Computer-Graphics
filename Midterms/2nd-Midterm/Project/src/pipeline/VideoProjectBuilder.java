@@ -27,12 +27,18 @@ import java.util.List;
  */
 public class VideoProjectBuilder {
 
+    //keep progress so we can show in the ui
+    public interface ProgressListener {
+        void onStep(int step, int totalSteps, String message);
+    }
+
     private final ExifToolService exifToolService;
     private final OpenAIService openAIService;
     private final OpenAITTSService ttsService;
     private final MapService mapService;
     private final FFmpegService ffmpegService;
     private final File workDir;
+    private ProgressListener progressListener;
 
     public VideoProjectBuilder(
             ExifToolService exifToolService,
@@ -47,6 +53,17 @@ public class VideoProjectBuilder {
         this.mapService = mapService;
         this.ffmpegService = ffmpegService;
         this.workDir = workDir;
+    }
+
+    public void setProgressListener(ProgressListener listener) {
+        this.progressListener = listener;
+    }
+
+    private void reportProgress(int step, String message) {
+        System.out.println(message);
+        if (progressListener != null) {
+            progressListener.onStep(step, 10, message);
+        }
     }
 
     //builds complete video from a directory of media files
@@ -93,7 +110,7 @@ public class VideoProjectBuilder {
     //scan the directory and extract metadata from the media files
     private TravelSequence scanAndExtractMetadata(File inputDir){
 
-        System.out.println("[Step 1/10] Scanning media files and extracting metadata...");
+        reportProgress(1, "[Step 1/10] Scanning media files and extracting metadata...");
         TravelSequence sequence = new TravelSequence();
 
         File[] files = inputDir.listFiles((dir, name) -> {
@@ -127,7 +144,7 @@ public class VideoProjectBuilder {
     //generate descriptions with ai for each media file
     private void generateDescriptions(TravelSequence sequence){
 
-        System.out.println("[Step 2/10] Generating AI descriptions...");
+        reportProgress(2, "[Step 2/10] Generating AI descriptions...");
         for (MediaContent media : sequence.getSortedMedia()) {
             try {
                 String description = openAIService.describeContent(media);
@@ -147,7 +164,7 @@ public class VideoProjectBuilder {
     //resolve gps coordinate to something human can name, because one of the requirements said that the places had to be recognizable
     private void resolveLocationNames(TravelSequence sequence){
 
-        System.out.println("[Step 3/10] Resolving location names...");
+        reportProgress(3, "[Step 3/10] Resolving location names...");
         for (MediaContent media : sequence.getSortedMedia()) {
             if (media.hasGPSData() && media.getLocation().getPlaceName() == null) {
                 try {
@@ -166,7 +183,7 @@ public class VideoProjectBuilder {
     //derives mood from the descriptions, so it can be used to create the first image
     private String extractJourneyMood(TravelSequence sequence)
             throws IOException, InterruptedException {
-        System.out.println("[Step 4/10] Extracting journey mood...");
+        reportProgress(4, "[Step 4/10] Extracting journey mood...");
         try {
             String mood = openAIService.extractJourneyMood(sequence.getSortedMedia());
             System.out.println("  + Mood: " + mood + "\n");
@@ -183,7 +200,7 @@ public class VideoProjectBuilder {
     //generates the image from for the intro
     private void generateIntroImage(TravelSequence sequence, String journeyMood) throws IOException, InterruptedException {
 
-        System.out.println("[Step 5/10] Generating essence intro image...");
+        reportProgress(5, "[Step 5/10] Generating essence intro image...");
         File introImage = openAIService.generateEssenceImage(sequence.getSortedMedia(), journeyMood);
         sequence.setIntroImage(introImage);
         System.out.println("intro image saved: " + introImage.getName() + "\n");
@@ -193,7 +210,7 @@ public class VideoProjectBuilder {
     //generates phrase based on the locations
     private void generateInspirationPhrase(TravelSequence sequence){
 
-        System.out.println("[Step 6/10] Generating inspiration phrase from all locations...");
+        reportProgress(6, "[Step 6/10] Generating inspiration phrase from all locations...");
         try {
             String phrase = openAIService.generateInspirationPhrase(sequence.getAllLocations());
             sequence.setInspirationPhrase(phrase);
@@ -209,7 +226,7 @@ public class VideoProjectBuilder {
     private void generateMapImage(TravelSequence sequence)
             throws IOException, InterruptedException {
 
-        System.out.println("[Step 7/10] Generating map image...");
+        reportProgress(7, "[Step 7/10] Generating map image...");
         List<model.GPSLocation> locations = sequence.getAllLocations();
         if (locations.size() < 2) {
             System.err.println("map generation skipped, no GPS tagged media available\n");
@@ -224,7 +241,7 @@ public class VideoProjectBuilder {
     private List<File> generateNarration(TravelSequence sequence)
             throws IOException, InterruptedException {
 
-        System.out.println("[Step 8/10] Generating TTS narration...");
+        reportProgress(8, "[Step 8/10] Generating TTS narration...");
         List<File> narrationFiles = new ArrayList<>();
         List<MediaContent> sortedMedia = sequence.getSortedMedia();
 
@@ -245,7 +262,7 @@ public class VideoProjectBuilder {
     //adjusts the media to portrait mode and overlays the narration audio
     private List<File> processMediaSegments(TravelSequence sequence, List<File> narrationFiles) {
 
-        System.out.println("[Step 9/10] Processing media segments...");
+        reportProgress(9, "[Step 9/10] Processing media segments...");
         List<File> videoSegments = new ArrayList<>();
         List<MediaContent> sortedMedia = sequence.getSortedMedia();
 
@@ -276,7 +293,7 @@ public class VideoProjectBuilder {
     //step 10, assemble al segments into the final vido
     private File assembleVideo(TravelSequence sequence, List<File> mediaSegments, File outputFile) throws IOException, InterruptedException {
 
-        System.out.println("[Step 10/10] Assembling final video...");
+        reportProgress(10, "[Step 10/10] Assembling final video...");
         List<File> allSegments = new ArrayList<>();
 
         // 1. intro image segment (ai generated essence)
