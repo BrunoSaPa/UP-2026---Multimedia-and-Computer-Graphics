@@ -72,3 +72,6 @@ Midterms/javafx-sdk-25.0.2/lib/libprism_mtl.dylib
 Midterms/javafx-sdk-25.0.2/lib/libprism_sw.dylib
 Midterms/javafx-sdk-25.0.2/src.zip
 Midterms/openjfx-25.0.2_osx-aarch64_bin-sdk.zip
+*.JPG
+*.mp4
+/Midterms/2nd-Midterm/Project/input/.travel_video_work

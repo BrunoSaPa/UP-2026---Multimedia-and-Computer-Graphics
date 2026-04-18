@@ -29,7 +29,7 @@ public class Main {
             String openAiImageModel = envOrDefault("OPENAI_IMAGE_MODEL", "gpt-image-1");
             String openAiTtsModel = envOrDefault("OPENAI_TTS_MODEL", "gpt-4o-mini-tts");
             String openAiTtsVoice = envOrDefault("OPENAI_TTS_VOICE", "alloy");
-            double openAiTtsSpeed = doubleEnvOrDefault("OPENAI_TTS_SPEED", 0.9);
+            double openAiTtsSpeed = doubleEnvOrDefault("OPENAI_TTS_SPEED", 1.1);
             int openAiRetries = intEnvOrDefault("OPENAI_MAX_RETRIES", 3);
             long openAiBackoffMs = intEnvOrDefault("OPENAI_RETRY_BACKOFF_MS", 1500);
 
@@ -58,7 +58,7 @@ public class Main {
                     openAiRetries,
                     openAiBackoffMs
             );
-            MapService      mapService      = new MapService(openAIService, workDir);
+            MapService      mapService      = new MapService(workDir);
             FFmpegService   ffmpegService   = new FFmpegService(workDir);
 
             //build the video
